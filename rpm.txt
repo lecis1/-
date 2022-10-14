@@ -1,0 +1,9 @@
+错误：rpmdb: BDB0113 Thread/process 9889/140184524245056 failed: BDB1507 Thread died in Berkeley DB library
+错误：db5 错误(-30973) 来自 dbenv->failchk：BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery
+错误：无法使用 db5 -  (-30973) 打开 Packages 索引
+错误：无法从 /var/lib/rpm 打开软件包数据库
+错误：rpmdb: BDB0113 Thread/process 9889/140184524245056 failed: BDB1507 Thread died in Berkeley DB library
+错误：db5 错误(-30973) 来自 dbenv->failchk：BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery
+错误：无法从 /var/lib/rpm 打开软件包数据库
+
+解决办法：rpmdb --rebuilddb

@@ -1,0 +1,14 @@
+python进程加锁,防止多个进程同时访问公共资源,j加锁是为了保证数据的一致性
+用法：
+lock = thireading.Lock()
+
+
+if lock.acquire():#判断能否请求加锁（当前没有其他线程访问公共资源）
+	def run(): #需要保证安全的方法
+
+
+finally:
+	lock.release()
+
+
+# acquire()和release()必须成对存在

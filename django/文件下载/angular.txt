@@ -1,0 +1,10 @@
+downloadCert(packetName: string) {
+    this.caService.downloadCert(packetName).subscribe(
+      blob => saveAs(blob, `${packetName}`)
+    );
+  }
+
+
+downloadCert(packetName:string): Observable<Blob>{
+    return this.http.get(`/cert/download/?file_name=${packetName}`, {responseType: 'blob'});
+  }

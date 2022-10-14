@@ -1,0 +1,10 @@
+点击插件图标
+feat: 新内容
+fix: bug修改
+
+scope:影响范围
+subject: 摘要信息
+body:修改的内容
+footer: 粘贴bug的链接
+
+点击complete完成模板的书写
