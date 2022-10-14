@@ -1,0 +1,10 @@
+this.form.patchValue({
+          [this.param.key]: this.default_value,
+      })
+需要用变量时，用括号，不然this.param.key被认为是字符串
+
+
+绝对路径获取文件名
+
+var fullpath = "C:/Users/my.user/Desktop/the_filename.txt";
+var filename = fullpath.split('/').pop().split('.')[0];

@@ -1,0 +1,4 @@
+执行命令 bumpversion build  
+// bumpversion --new_version=3.2.0直接指定版本
+会生成tag，将tag推送push到仓库
+再执行python setup.py sdist生成文件然后上传

@@ -1,0 +1,24 @@
+cp -r /usr/project/django-iacs-1.0.0/ /usr/project/compile
+将一个文件夹移动另一个文件夹下
+
+---------------------------------------------------------
+
+linux平台修改pip源：找到/root/.pip/pip.conf 如果不存在就创建
+[global] 
+index-url = http://192.168.254.75:8442/repository/pypi/simple/  #指定下载源
+
+[install] 
+trusted-host=192.168.254.75 # 使用http方式通信
+
+---------------------------------------------------------
+
+
+windows平台下更换pip源
+在C:\Users\dong(用户名)下创建pip文件夹，在pip文件夹里创建pip.ini文件，添加内容：
+[global] 
+index-url = http://192.168.254.75:8442/repository/pypi/simple/ 
+
+[install] 
+trusted-host=192.168.254.75
+
+-------------------------------------------------------

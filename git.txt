@@ -1,0 +1,26 @@
+刷新：git fetch --all
+
+! [rejected]        v3.2.0-alpha119 -> v3.2.0-alpha119  (would clobber existing tag)：本地与远程tag不一致，删除本地tag，再git fetch --all
+
+修改本地仓库对应的远程仓库
+git remote set-url origin 远程仓库地址 修改远程仓库地址
+
+
+
+! [rejected]        v3.3.0-alpha1 -> v3.3.0-alpha1  (would clobber existing tag)  git fetch --tags -f
+
+
+
+最近提交代码到github，合并分支的时候提示"master and main are entirely different commit histories"
+master为本地分支名称
+main为github创建的分支名称
+
+解决方法：
+
+git fetch origin
+git merge origin/main --allow-unrelated-histories
+git push origin master
+git fetch 先把分支拉下来
+git merge 加上--allow-unrelated-histories，才可以合并两个完全不同的分支，GitHub上也是因为这个原因合并不了两个分支
+git merge origin/main，是把origin仓库的main分支与当前分支进行合并
+这里有个坑，之前在网上查的命令都是git merge origin master，我一直以为是把origin的分支与本地master分支合并的意思，所以之前我尝试把远程分支拉下来合并的时候，一直不成功，误打误撞试了一下git merge origin/main才成功。今天查了资料发现git merge <分支名> <分支名> git merge 支持合并多个分支，把后面列举的分支名都合并到当前分支上。。。。之前只是用git的几个简单命令来管理代码，遇到坑了才发现里面的弯弯绕绕还挺多的。。。还是得看官方文档稳妥

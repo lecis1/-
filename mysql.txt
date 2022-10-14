@@ -1,0 +1,12 @@
+alter user 'root'@'localhost' identified by '123456';
+更改root密码
+create database compile default character set utf8 collate utf8_general_ci;
+以特定字符创建数据库
+
+
+如果数据库与migration文件不一致:
+1.数据库已经是最新结构，但migration文件发生缺失：删新的migration文件，将数据库的django_migration相关的记录删除，执行migrate --fake(只修改django_migration文件)
+2.删除数据库里相关的表，和django_migration里的记录，在进行makemigrations和migrate操作
+
+
+django.db.utils.OperationalError: (1366, "Incorrect string value: '\\xE8\\x8E\\xB7\\xE5\\x8F\\x96...' for column 'name' at row 1")	出现此问题多半与数据库的字符编码有关系

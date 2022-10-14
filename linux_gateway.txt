@@ -1,0 +1,258 @@
+ENV LC_CTYPE "zh_CN.UTF-8"
+RUN echo 'export LC_CTYPE="zh_CN.UTF-8"' >> /etc/profile
+RUN git clone {repository_url} /opt/{name} && \
+    cd /opt/{name} && \
+    git checkout {revision} && \
+    sed -i '14i %global __python %{__python3}' /opt/{name}/extras/rpm/vpp.spec && \
+    wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo && \
+    yum makecache fast && \
+    yum install -y centos-release-scl && \
+    yum install -y devtoolset-8-gcc devtoolset-8-gcc-c++ devtoolset-8-binutils && \
+    mv /opt/ngs/tools/python /opt/ngs/tools/python_compile && \
+    rpm -e python3 && \
+    mv /opt/ngs/tools/python_compile /opt/ngs/tools/python && \
+    export UNATTENDED=y && \
+    make install-dep && \
+    scl enable devtoolset-8 bash && \
+    make build-release && \
+    echo 'export DPDK_SDK_ROOT=/opt/minidpi_vpp/build-root/install-vpp-native/external'  >> /etc/profile && \
+    echo "{name}:" >> /etc/Version.yaml && \
+    echo "    url: {repository_url}" >> /etc/Version.yaml && \
+    echo -e "    rversion: {revision}" >> /etc/Version.yaml && \
+    echo -e "    time: $(date +'%Y-%m-%d %H:%M:%S')\n" >> /etc/Version.yaml
+
+
+
+
+libcom
+ENV LC_CTYPE "zh_CN.UTF-8"
+RUN echo 'export LC_CTYPE="zh_CN.UTF-8"' >> /etc/profile
+RUN git clone {repository_url} /tmp/soft/{name} && \
+    cd /tmp/soft/{name} && git checkout {revision} && \
+    bash build.sh clean && bash build.sh release && \
+    cd build && make install && cd / && \
+    rm -fr /tmp/soft/* && \
+    echo "{name}:" >> /etc/Version.yaml && \
+    echo "    url: {repository_url}" >> /etc/Version.yaml && \
+    echo -e "    rversion: {revision}" >> /etc/Version.yaml && \
+    echo -e "    time: $(date +'%Y-%m-%d %H:%M:%S')\n" >> /etc/Version.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RUN rpm --rebuilddb && \
+    curl -s http://192.168.254.75/resource/scripts/boyun_local_yum.sh | sh && \
+    yum install -y git && \
+RUN mkdir /root/.ssh
+RUN echo $'-----BEGIN RSA PRIVATE KEY-----\n\
+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\n\
+-----END RSA PRIVATE KEY-----' >> /root/.ssh/compileHelper 
+RUN echo $'HostName 192.168.254.249 \n\
+Host 192.168.254.249 \n\
+IdentityFile /root/.ssh/compileHelper \n\
+Port 22 \n\
+PreferredAuthentications publickey \n\
+User git \n\
+StrictHostKeyChecking no' >> /root/.ssh/config
+RUN chmod 700 /root/.ssh/compileHelper && \
+    echo "git:" >> /etc/Version.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENV LC_CTYPE "zh_CN.UTF-8"
+RUN echo 'export LC_CTYPE="zh_CN.UTF-8"' >> /etc/profile
+RUN mkdir /root/.ssh
+RUN echo $'-----BEGIN RSA PRIVATE KEY-----\n\
+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\n\
+-----END RSA PRIVATE KEY-----' >> /root/.ssh/compileHelper 
+RUN echo $'HostName 192.168.254.249 \n\
+Host 192.168.254.249 \n\
+IdentityFile /root/.ssh/compileHelper \n\
+Port 22 \n\
+PreferredAuthentications publickey \n\
+User git \n\
+StrictHostKeyChecking no' >> /root/.ssh/config
+RUN chmod 700 /root/.ssh/compileHelper && \
+    git clone git@192.168.254.249:group_broadtech/sudf.git /tmp/soft/bysudf && \
+    cd /tmp/soft/bysudf && \
+    git checkout sudf_202207042027 && \
+    tar -xzf /tmp/soft/bysudf/3rd/ragel-6.9.tar.gz -C /opt && \
+    cd /opt/ragel-6.9/ && ./configure && make && make install && \
+    cd /tmp/soft/bysudf && \
+    bash build.sh clean && bash build.sh  mini && \
+    cd build && make install && cd / && \
+    rm -fr /tmp/soft/* && \
+    echo "bysudf:" >> /etc/Version.yaml && \
+    echo "    url: git@192.168.254.249:group_broadtech/sudf.git" >> /etc/Version.yaml && \
+    echo -e "    rversion: sudf_202207042027" >> /etc/Version.yaml && \
+    echo -e "    time: $(date +'%Y-%m-%d %H:%M:%S')\n" >> /etc/Version.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENV LC_CTYPE "zh_CN.UTF-8"
+RUN echo 'export LC_CTYPE="zh_CN.UTF-8"' >> /etc/profile
+RUN git clone git@192.168.254.249:group_broadtech/sudf.git /tmp/soft/bysudf && \
+    cd /tmp/soft/bysudf && \
+    git checkout sudf_202207042027 && \
+    tar -xzf /tmp/soft/bysudf/3rd/ragel-6.9.tar.gz -C /opt && \
+    cd /opt/ragel-6.9/ && ./configure && make && make install && \
+    cd /tmp/soft/bysudf && \
+    bash build.sh clean && bash build.sh  mini && \
+    cd build && make install && cd / && \
+    rm -fr /tmp/soft/* && \
+    echo "bysudf:" >> /etc/Version.yaml && \
+    echo "    url: git@192.168.254.249:group_broadtech/sudf.git" >> /etc/Version.yaml && \
+    echo -e "    rversion: sudf_202207042027" >> /etc/Version.yaml && \
+    echo -e "    time: $(date +'%Y-%m-%d %H:%M:%S')\n" >> /etc/Version.yaml

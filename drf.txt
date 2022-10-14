@@ -1,0 +1,9 @@
+1.在ViewSet下可以定义属性
+filter_backends = （SearchFilter, DjangoFilterBackend, OrderingFilter）
+search_fields = (
+	"server",
+	"username"
+)
+来过滤返回数据
+
+配合angular的[ngExNzSearchOptions]="searchOptions" (ngExOnSearch)="OnSearch($event)搜索组件使用，实现搜索
